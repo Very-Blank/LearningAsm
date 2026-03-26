@@ -21,6 +21,8 @@
         name = "run";
         runtimeInputs = [pkgs.binutils];
         text = ''
+          set +e
+
           if [[ "$#" -ne 1 ]]; then
               echo "Illegal number of parameters." >&2
               exit 2
@@ -30,7 +32,7 @@
           ld obj.o -o bin
           rm obj.o
           ./bin
-          echo $?
+          echo "Program output: $?"
           rm bin
         '';
       };
@@ -54,7 +56,7 @@
         ];
 
         shellHook = ''
-          exec ${pkgs.lib.getExe pkgs.zsh}
+          exec ${pkgs.lib.getExe pkgs.tmux}
         '';
       };
   };
