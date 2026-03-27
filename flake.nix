@@ -30,7 +30,7 @@
 
           mkdir ${tmpFolder}
           as "$1" -o ${tmpFolder}/obj.o
-          ld ${tmpFolder}/obj.o -o bin
+          ld ${tmpFolder}/obj.o -o ${tmpFolder}/bin
 
           set +e
           ${tmpFolder}/./bin

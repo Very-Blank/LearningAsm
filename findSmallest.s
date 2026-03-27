@@ -2,7 +2,7 @@
 
 .section .data
 len:
-    .quad 0
+    .quad 7
 array:
     .quad 5, 20, 33, 80, 52, 10, 1
 
