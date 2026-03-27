@@ -20,20 +20,23 @@
       runScript = pkgs.writeShellApplication {
         name = "run";
         runtimeInputs = [pkgs.binutils];
-        text = ''
-          set +e
-
+        text = let
+          tmpFolder = "/tmp/assembly";
+        in ''
           if [[ "$#" -ne 1 ]]; then
               echo "Illegal number of parameters." >&2
               exit 2
           fi
 
-          as "$1" -o obj.o
-          ld obj.o -o bin
-          rm obj.o
-          ./bin
+          mkdir ${tmpFolder}
+          as "$1" -o ${tmpFolder}/obj.o
+          ld ${tmpFolder}/obj.o -o bin
+
+          set +e
+          ${tmpFolder}/./bin
           echo "Program output: $?"
-          rm bin
+          set -e
+          rm -r ${tmpFolder}
         '';
       };
     in
