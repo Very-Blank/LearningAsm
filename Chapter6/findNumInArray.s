@@ -6,11 +6,26 @@ len:
 array:
     .quad 5, 20, 33, 80, 52, 10, 1
 num:
-    .quad 80
+    .quad 80 
 
 .section .text
 
 _start:
+movq len, %rdi
+movq len, %rcx
 
+loop:
+movq array-8(, %rcx, 8), %rax
+cmp num, %rax 
+jne skip 
+
+movq %rcx, %rdi
+dec %rdi
+jmp end
+
+skip:
+loopq loop
+
+end:
 movq $60, %rax
 syscall

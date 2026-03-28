@@ -59,7 +59,7 @@
         ];
 
         shellHook = ''
-          exec ${pkgs.lib.getExe pkgs.tmux}
+          exec ${pkgs.lib.getExe pkgs.zsh}
         '';
       };
   };
